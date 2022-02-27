@@ -23,21 +23,21 @@ pipeline {
     }
 
     stage('Deploy') {
-        steps {
-        //   bat 'docker push srafique001/capstone2:latest'
-         } 
+        // steps {
+        // //   bat 'docker push srafique001/capstone2:latest'
+        //  } 
     }
 
     stage('Testing') {
-        steps {
-        //   bat 'docker push srafique001/capstone2:latest'
-         } 
+        // steps {
+        // //   bat 'docker push srafique001/capstone2:latest'
+        //  } 
     }
 
     stage('Monitoring') {
-        steps {
-        //   bat 'docker push srafique001/capstone2:latest'
-         } 
+        // steps {
+        // //   bat 'docker push srafique001/capstone2:latest'
+        //  } 
     }
 
 
