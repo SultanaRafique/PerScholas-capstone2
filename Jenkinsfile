@@ -30,7 +30,7 @@ pipeline {
 
     stage('Deploying') {
         steps {
-            echo 'Deploying....'
+            bat 'ssh sultana@192.168.1.208  terraform apply'
          } 
     }
 
