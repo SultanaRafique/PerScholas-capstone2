@@ -16,6 +16,7 @@ pipeline {
         }
     }
 
+
      stage('Docker Push') {
         steps {
           sh 'docker push srafique001/capstone2:latest'
@@ -32,8 +33,6 @@ pipeline {
         steps {
 
             sh """
-            whoami
-             ssh -v sultana@192.168.1.208 date 
              cd ~/learn-terraform-deploy-nginx-kubernetes
              terraform apply
             """
