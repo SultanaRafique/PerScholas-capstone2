@@ -30,7 +30,7 @@ pipeline {
 
     stage('Deploying') {
         steps {
-            bat 'ssh sultana@192.168.1.208  terraform apply'
+            bat 'ssh sultana@192.168.1.208 cd ~/learn-terraform-deploy-nginx-kubernetes terraform apply'
          } 
     }
 
