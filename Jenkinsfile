@@ -33,7 +33,7 @@ pipeline {
 
             
             bat """
-             ssh sultana@192.168.1.208
+             ssh -tt sultana@192.168.1.208
              cd ~/learn-terraform-deploy-nginx-kubernetes
              terraform apply
             """
