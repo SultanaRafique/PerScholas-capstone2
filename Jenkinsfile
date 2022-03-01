@@ -32,7 +32,8 @@ pipeline {
         steps {
 
             bat """
-             ssh -v sultana@192.168.1.208 date
+            whoami
+             ssh -v sultana@192.168.1.208 date 
              cd ~/learn-terraform-deploy-nginx-kubernetes
              terraform apply
             """
