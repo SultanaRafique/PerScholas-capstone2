@@ -22,32 +22,23 @@ pipeline {
          } 
     }
 
-    // stage('Deploy') {
-    //     // steps {
-    //     // //   bat 'docker push srafique001/capstone2:latest'
-    //     //  } 
-    // }
+    stage('Testing') {
+        steps {
+            echo 'Testing....'
+         } 
+    }
 
-    // stage('Testing') {
-    //     // steps {
-    //     // //   bat 'docker push srafique001/capstone2:latest'
-    //     //  } 
-    // }
+    stage('Deploying') {
+        steps {
+            echo 'Deploying....'
+         } 
+    }
 
-    // stage('Monitoring') {
-    //     // steps {
-    //     // //   bat 'docker push srafique001/capstone2:latest'
-    //     //  } 
-    // }
+    stage('Monitoring') {
+        steps {
+        echo 'Monitoring...'
+         } 
+    }
 
-
-    /* stage('Docker Push') {
-      steps {
-        withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-          bat "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          bat 'docker push srafique001/capstone1:latest'
-         }
-      }
-    } */
   }
 }
