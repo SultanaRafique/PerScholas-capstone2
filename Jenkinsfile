@@ -32,7 +32,7 @@ pipeline {
     stage('Deploying') {
         steps {
 
-            sh 'terraform apply'
+            sh ' cd ~/learn-terraform-deploy-nginx-kubernetes && terraform apply'
             
          } 
     }
