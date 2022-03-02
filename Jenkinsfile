@@ -32,7 +32,7 @@ pipeline {
     stage('Deploying') {
         steps {
 
-            sh ' cd /home/sultana/learn-terraform-deploy-nginx-kubernetes && terraform apply -lock=false'
+            sh ' cd /home/sultana/learn-terraform-deploy-nginx-kubernetes && terraform apply -y -lock=false'
             
          } 
     }
