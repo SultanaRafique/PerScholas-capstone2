@@ -1,0 +1,198 @@
+Console Output
+Started by user jenkins
+Obtained Jenkinsfile from git https://github.com/SultanaRafique/PerScholas-capstone2.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/capstone2
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/capstone2/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/SultanaRafique/PerScholas-capstone2.git # timeout=10
+Fetching upstream changes from https://github.com/SultanaRafique/PerScholas-capstone2.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.25.1'
+ > git fetch --tags --force --progress -- https://github.com/SultanaRafique/PerScholas-capstone2.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 83740a999adaee555e12ac51a35add191d9213fe (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 83740a999adaee555e12ac51a35add191d9213fe # timeout=10
+Commit message: "u"
+ > git rev-list --no-walk 83740a999adaee555e12ac51a35add191d9213fe # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Docker Build)
+[Pipeline] sh
++ docker build -t srafique001/capstone2:latest .
+Sending build context to Docker daemon   9.93MB
+
+Step 1/6 : FROM python:3.7
+ ---> 6bcd1cc24497
+Step 2/6 : RUN mkdir /app
+ ---> Using cache
+ ---> f4775a4bc3d6
+Step 3/6 : WORKDIR /app/
+ ---> Using cache
+ ---> 2034f84835b0
+Step 4/6 : ADD . /app/
+ ---> Using cache
+ ---> 872b144aee71
+Step 5/6 : RUN pip install -r requirements.txt
+ ---> Using cache
+ ---> 717ff37abefa
+Step 6/6 : CMD ["python", "/app/app.py"]
+ ---> Using cache
+ ---> a373d183abb7
+Successfully built a373d183abb7
+Successfully tagged srafique001/capstone2:latest
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Docker Login)
+[Pipeline] withCredentials
+Masking supported pattern matches of $dockerHubPassword
+[Pipeline] {
+[Pipeline] sh
+Warning: A secret was passed to "sh" using Groovy String interpolation, which is insecure.
+		 Affected argument(s) used the following variable(s): [dockerHubPassword]
+		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
++ docker login -u srafique001 -p ****
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /var/lib/jenkins/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Docker Push)
+[Pipeline] sh
++ docker push srafique001/capstone2:latest
+The push refers to repository [docker.io/srafique001/capstone2]
+069a58b78b52: Preparing
+de8de06b8e85: Preparing
+7d5487d1d3fe: Preparing
+91861565d249: Preparing
+13b05b508dcf: Preparing
+1e3c20347499: Preparing
+a3232401de62: Preparing
+204e42b3d47b: Preparing
+613ab28cf833: Preparing
+bed676ceab7a: Preparing
+6398d5cccd2c: Preparing
+0b0f2f2f5279: Preparing
+204e42b3d47b: Waiting
+613ab28cf833: Waiting
+bed676ceab7a: Waiting
+0b0f2f2f5279: Waiting
+a3232401de62: Waiting
+1e3c20347499: Waiting
+6398d5cccd2c: Waiting
+069a58b78b52: Layer already exists
+91861565d249: Layer already exists
+7d5487d1d3fe: Layer already exists
+13b05b508dcf: Layer already exists
+de8de06b8e85: Layer already exists
+1e3c20347499: Layer already exists
+a3232401de62: Layer already exists
+204e42b3d47b: Layer already exists
+613ab28cf833: Layer already exists
+bed676ceab7a: Layer already exists
+6398d5cccd2c: Layer already exists
+0b0f2f2f5279: Layer already exists
+latest: digest: sha256:722738a668ed0ab7a863441d320e2667eab6c9003f7183521bc751fbb08d1b97 size: 2848
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Testing)
+[Pipeline] echo
+Testing....
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploying)
+[Pipeline] sh
++ cd /home/sultana/learn-terraform-deploy-nginx-kubernetes
++ terraform apply -auto-approve -lock=false
+[0m[1mkubernetes_deployment.nginx: Refreshing state... [id=default/capstoneproject][0m
+[0m
+[1m[36mNote:[0m[1m Objects have changed outside of Terraform[0m
+
+[0mTerraform detected the following changes made outside of Terraform since the
+last "terraform apply":
+
+[1m  # kubernetes_deployment.nginx[0m has changed[0m[0m
+[0m  [33m~[0m[0m resource "kubernetes_deployment" "nginx" {
+        [1m[0mid[0m[0m               = "default/capstoneproject"
+        [90m# (1 unchanged attribute hidden)[0m[0m
+
+      [33m~[0m [0mmetadata {
+          [32m+[0m [0m[1m[0mannotations[0m[0m      = {}
+            [1m[0mname[0m[0m             = "capstoneproject"
+            [90m# (5 unchanged attributes hidden)[0m[0m
+        }
+
+      [33m~[0m [0mspec {
+            [90m# (5 unchanged attributes hidden)[0m[0m
+
+
+
+          [33m~[0m [0mtemplate {
+              [33m~[0m [0mmetadata {
+                  [32m+[0m [0m[1m[0mannotations[0m[0m = {}
+                    [90m# (2 unchanged attributes hidden)[0m[0m
+                }
+
+              [33m~[0m [0mspec {
+                  [32m+[0m [0m[1m[0mnode_selector[0m[0m                    = {}
+                    [90m# (10 unchanged attributes hidden)[0m[0m
+
+                  [33m~[0m [0mcontainer {
+                      [32m+[0m [0m[1m[0margs[0m[0m                       = []
+                      [32m+[0m [0m[1m[0mcommand[0m[0m                    = []
+                        [1m[0mname[0m[0m                       = "capstonetwocontainer"
+                        [90m# (7 unchanged attributes hidden)[0m[0m
+
+
+                        [90m# (2 unchanged blocks hidden)[0m[0m
+                    }
+                }
+            }
+            [90m# (2 unchanged blocks hidden)[0m[0m
+        }
+    }
+
+
+Unless you have made equivalent changes to your configuration, or ignored the
+relevant attributes using ignore_changes, the following plan may include
+actions to undo or respond to these changes.
+[90m
+─────────────────────────────────────────────────────────────────────────────[0m
+
+[0m[1m[32mNo changes.[0m[1m Your infrastructure matches the configuration.[0m
+
+[0mYour configuration already matches the changes detected above. If you'd like
+to update the Terraform state to match, create and apply a refresh-only plan:
+  terraform apply -refresh-only
+[0m[1m[32m
+Apply complete! Resources: 0 added, 0 changed, 0 destroyed.
+[0m
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
