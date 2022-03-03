@@ -37,11 +37,5 @@ pipeline {
          } 
     }
 
-    stage('Monitoring') {
-        steps {
-        echo 'Monitoring...'
-         } 
-    }
-
   }
 }
